@@ -1,6 +1,6 @@
 # EphemeralTrust
 
-EphemeralTrust is a research project exploring a small but important problem in cloud access analysis: **does the IAM configuration we see right now actually describe all of the access that still exists?**
+EphemeralTrust is a research project exploring a small but important problem in cloud access analysis: does the IAM configuration we see right now actually describe all of the access that still exists?
 
 With temporary AWS credentials, not always.
 
@@ -20,15 +20,15 @@ During an experiment, permissions or trust relationships can change while config
 
 The interesting part comes afterward: reconstructing what access was possible from different amounts and types of evidence.
 
-In other words, if two methods observe the same changing environment differently, **what does each one miss?**
+In other words, if two methods observe the same changing environment differently, what does each one miss?
 
-## What came out of it
+## Results
 
 The clearest case was scenario S3.
 
-A previously issued session remained usable while equivalent fresh session issuance was denied. The final dataset contains **168 paired observations** of this state.
+A previously issued session remained usable while equivalent fresh session issuance was denied. The final dataset contains 168 paired observations of this state.
 
-Sampling frequency also made a noticeable difference. At a 60-second interval, the configuration-oriented B1 condition recovered the selected witness semantic tuple in **0/10** phase projections, compared with **10/10** for the session-aware B2 condition.
+Sampling frequency also made a noticeable difference. At a 60-second interval, the configuration-oriented B1 condition recovered the selected witness semantic tuple in 0/10 phase projections, compared with 10/10 for the session-aware B2 condition.
 
 There is also a denser observation condition, T. One important limitation is that T-S uses the same candidate logic as B2 and simply has denser observations available. Better first-witness results therefore should not be treated as evidence of a better algorithm.
 
