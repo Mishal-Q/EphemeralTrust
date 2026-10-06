@@ -1,101 +1,79 @@
 # EphemeralTrust
 
-This repository contains the code and some of the results from my research project, **EphemeralTrust: Session State and Observation Design in Controlled AWS Access Traces**.
+EphemeralTrust is a research project exploring a small but important problem in cloud access analysis: **does the IAM configuration we see right now actually describe all of the access that still exists?**
 
-The project started from a pretty simple question. When we look at cloud permissions, are we actually seeing what a user or session could do at that point in time, or are we just looking at the IAM configuration and assuming that tells the whole story?
+With temporary AWS credentials, not always.
 
-That became more interesting once temporary AWS credentials were involved.
+A role can lose the ability to issue a new session while a session issued earlier is still alive and usable. That makes access analysis more interesting than simply looking at the current policy or taking occasional configuration snapshots.
 
-For example, a role might no longer be able to issue a new session, but a session that was issued earlier can still exist and continue doing things. If we only take occasional snapshots of the IAM configuration, some of that behavior can be missed.
+EphemeralTrust was built to explore that gap in a controlled AWS environment and see what changes when session state and observation timing are taken into account.
 
-So I built EphemeralTrust to experiment with this in a controlled AWS environment.
+## The idea
 
-## What I actually did
+The experimental environment combines GitHub Actions OIDC, AWS STS, IAM roles and policies, temporary credentials, role chaining, S3 canary operations and CloudTrail.
 
-The setup uses GitHub Actions OIDC, AWS STS, IAM roles and policies, temporary credentials, role chaining, S3 operations and CloudTrail.
+During an experiment, permissions or trust relationships can change while configuration state, session issuance and access attempts are recorded over time.
 
-I created different scenarios where permissions or trust relationships changed while the experiment was running. The system recorded configuration snapshots, issued sessions, access attempts and other events over time.
+The interesting part comes afterward: reconstructing what access was possible from different amounts and types of evidence.
 
-I then compared different ways of reconstructing what was happening from those observations.
+In other words, if two methods observe the same changing environment differently, **what does each one miss?**
 
-The repository includes the Python implementation, Terraform infrastructure, experiment configuration, tests, analysis code and selected results.
+## What came out of it
 
-## What I found interesting
+The clearest case was scenario S3.
 
-The clearest example is S3.
+A previously issued session remained usable while equivalent fresh session issuance was denied. The final dataset contains **168 paired observations** of this state.
 
-An AWS session had already been issued. Later, fresh session issuance was denied, but the existing session could still successfully perform the tested operation.
+Sampling frequency also made a noticeable difference. At a 60-second interval, the configuration-oriented B1 condition recovered the selected witness semantic tuple in **0/10** phase projections, compared with **10/10** for the session-aware B2 condition.
 
-There were 168 paired observations where the existing session succeeded while fresh issuance was denied.
+There is also a denser observation condition, T. One important limitation is that T-S uses the same candidate logic as B2 and simply has denser observations available. Better first-witness results therefore should not be treated as evidence of a better algorithm.
 
-That is basically the problem I wanted to investigate. A configuration snapshot can tell you what can be issued *now*, but that does not necessarily describe every credential that is still alive from an earlier state.
+S5 explores another timing problem. If observations are combined without respecting when credentials could actually have existed, it is possible to construct a candidate path that does not fit the declared credential schedule.
 
-Sampling frequency mattered too.
+These are controlled scenarios rather than population-level measurements of AWS IAM. The goal was to make the timing problem observable and test how different reconstruction conditions behave around it.
 
-For one of the S3 comparisons at a 60-second sampling interval, the configuration-oriented B1 condition recovered the selected witness semantic tuple in 0/10 phase projections. The session-aware B2 condition recovered it in 10/10.
+## Repository structure
 
-There is also a denser observation condition called T. It sometimes gets better first-witness results, but this needs an important qualification: T-S uses the same candidate logic as B2. It gets more information. So I do **not** treat that as evidence that T is a better algorithm.
+- `src/` - Phase 2 implementation, experiment configuration and tests
+- `experiments/infra/` - Terraform infrastructure
+- `analysis/` - offline reconstruction code
+- `results/` - selected derived results
+- `docs/` - methodology, validation, execution and provenance material
 
-S5 looked at a different problem. Combining observations without respecting when credentials could actually have existed can produce a path that looks possible when the observations are viewed together, even though that path does not fit the declared credential schedule.
+The repository contains the implementation used for the research, but not the entire private experiment archive. Raw runtime material, credentials, Terraform state, local environments and working copies are intentionally excluded.
 
-## Repository layout
+## Reproducing the project
 
-`src/` contains the Phase 2 implementation and tests.
+A good route through the repository is:
 
-`experiments/` contains the protocol, example configuration and Terraform infrastructure.
-
-`analysis/` contains the offline reconstruction code.
-
-`results/` contains selected derived results.
-
-`docs/` contains the methodology, validation notes, runbook and provenance information.
-
-`paper/` is reserved for the final manuscript artifact.
-
-## About the data
-
-I am not uploading my entire research directory or every raw AWS trace to GitHub.
-
-The original experiments produced things like CloudTrail records, session records, probes and other runtime data. The public repository instead contains selected derived results that are useful for understanding the experiments without publishing the complete raw environment.
-
-It also does not contain AWS credentials, Terraform state, local environments or my old working copies.
-
-## Reproducing the work
-
-If you are trying to understand the project rather than immediately run it, I would start with:
-
-1. `docs/METHODOLOGY.md`
-2. `src/configs/protocol.json`
-3. `src/ephemeraltrust/`
+1. `src/configs/protocol.json`
+2. `src/ephemeraltrust/`
+3. `src/tests/`
 4. `analysis/reconstruct.py`
 5. `results/`
 
-`docs/VALIDATION.md` and `docs/RUNBOOK.md` contain more detail about validation and execution.
-
-The source used for the final Phase 2 experiments was frozen at Git commit:
+The final Phase 2 implementation was frozen at Git commit:
 
 `0872d08273f5239e45cb9fb92da1aa6a70214619`
 
-with source digest:
+Source SHA-256:
 
 `c2f58a037a24fc2ca403c867477d5f545de96375b7777f8d93813b52e7c39819`
 
-The per-file hashes are in `docs/SOURCE_FREEZE.json`, and the archive identity is preserved in `docs/ARCHIVE_IDENTITY.txt`.
+Per-file hashes are recorded in `docs/SOURCE_FREEZE.json`.
 
-One thing to keep in mind is that this GitHub repository is a cleaned public version of the research artifact. It is not supposed to be a byte-for-byte copy of the full private archive.
+The offline tests are the easiest way to check the implementation locally. The repository also contains AWS and Terraform code from the live experiments, so those parts should only be run after checking the configuration and `docs/RUNBOOK.md`.
 
-## Running it yourself
+## Documentation
 
-The offline code and tests are the safest place to start.
+For the details behind the experiments:
 
-The project also contains code that can interact with AWS and Terraform. I would not recommend just running the live experiment commands without reading the configuration first. They were written for a controlled research environment and can create, modify or remove AWS resources.
-
-## Scope
-
-This was a controlled study with a small set of deliberately constructed scenarios.
-
-So the results should not be read as something like "AWS IAM always behaves this way" or as population-level measurements of AWS. The point was to create concrete cases where session lifetime and observation timing matter, then see how different reconstruction conditions handle those cases.
+- `docs/METHODOLOGY.md` - experimental and analysis design
+- `docs/VALIDATION.md` - validation record
+- `docs/RUNBOOK.md` - execution procedure
+- `docs/REPRODUCIBILITY.md` - what is included in the public artifact
+- `docs/ARCHIVE_IDENTITY.txt` - frozen archive provenance
 
 ## Author
 
-Mishal Qadir
+**Mishal Qadir**
