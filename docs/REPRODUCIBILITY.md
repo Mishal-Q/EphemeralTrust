@@ -26,6 +26,14 @@ Source SHA-256:
 
 Individual source-file hashes are recorded in `SOURCE_FREEZE.json`.
 
+## Manuscript
+
+The public manuscript is `../paper/EphemeralTrust_Manuscript.pdf`.
+
+SHA-256:
+
+`354b719698308bd941c3c3682122ff5ac5a3efa52f82887aca12082db8143b6f`
+
 ## Not included
 
 The complete private research archive is not published in this repository. Raw AWS and CloudTrail traces, credential material, Terraform state, local environments, historical working copies and private archive packages are excluded.

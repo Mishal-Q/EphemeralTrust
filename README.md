@@ -8,6 +8,8 @@ A role can lose the ability to issue a new session while a session issued earlie
 
 EphemeralTrust was built to explore that gap in a controlled AWS environment and see what changes when session state and observation timing are taken into account.
 
+**Paper:** [EphemeralTrust: Session State and Observation Design in Controlled AWS Access Traces](paper/EphemeralTrust_Manuscript.pdf)
+
 ## The idea
 
 The experimental environment combines GitHub Actions OIDC, AWS STS, IAM roles and policies, temporary credentials, role chaining, S3 canary operations and CloudTrail.
@@ -39,6 +41,7 @@ These are controlled scenarios rather than population-level measurements of AWS 
 - `analysis/` - offline reconstruction code
 - `results/` - selected derived results
 - `docs/` - methodology, validation, execution and provenance material
+- `paper/` - research manuscript
 
 The repository contains the implementation used for the research, but not the entire private experiment archive. Raw runtime material, credentials, Terraform state, local environments and working copies are intentionally excluded.
 
