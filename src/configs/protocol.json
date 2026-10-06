@@ -1,0 +1,142 @@
+{
+  "schema": "ep2-protocol-1",
+  "status": "PILOT_CANDIDATE_NOT_LIVE_VALIDATED",
+  "duration": 7200,
+  "intervals": [
+    60,
+    300,
+    900,
+    1800
+  ],
+  "phases": 10,
+  "tick_seconds": 10,
+  "max_snapshot_staleness": 15,
+  "max_schedule_lateness": 30,
+  "confirmation_seconds": 300,
+  "confirmation_count": 3,
+  "setup_settle_seconds": 60,
+  "cloudtrail_lag_seconds": 600,
+  "minimum_core_runs": 8,
+  "planned_control_runs": 5,
+  "planned_core_runs": 10,
+  "bootstrap_resamples": 10000,
+  "seed": 20260913,
+  "practical_margin": 0.1,
+  "schedules": {
+    "s1": [],
+    "s2": [
+      [
+        1800,
+        "grant_cap"
+      ],
+      [
+        2400,
+        "revoke_cap"
+      ]
+    ],
+    "s3": [
+      [
+        1740,
+        "issue_old"
+      ],
+      [
+        1800,
+        "block_trust"
+      ],
+      [
+        3600,
+        "restore_trust"
+      ]
+    ],
+    "s4": [
+      [
+        1800,
+        "grant_chain"
+      ],
+      [
+        2400,
+        "grant_chain_cap"
+      ],
+      [
+        3000,
+        "remove_chain_cap"
+      ],
+      [
+        3300,
+        "remove_chain"
+      ]
+    ],
+    "s5": [
+      [
+        1200,
+        "grant_chain"
+      ],
+      [
+        1800,
+        "remove_chain"
+      ],
+      [
+        3600,
+        "grant_chain_cap"
+      ],
+      [
+        4200,
+        "remove_chain_cap"
+      ]
+    ],
+    "s6": [
+      [
+        1800,
+        "broad_trust"
+      ],
+      [
+        2400,
+        "strict_trust"
+      ]
+    ]
+  },
+  "episodes": {
+    "s1": {
+      "control": [
+        1800,
+        7200
+      ]
+    },
+    "s2": {
+      "temporary": [
+        1800,
+        2400
+      ]
+    },
+    "s3": {
+      "persistence": [
+        1800,
+        3540
+      ]
+    },
+    "s4": {
+      "chain": [
+        2400,
+        3000
+      ]
+    },
+    "s5": {},
+    "s6": {
+      "alternate": [
+        1800,
+        2400
+      ]
+    }
+  },
+  "amendments": [
+    "3600-second interval omitted; original five-interval scope would require a separately frozen 14400-second trace.",
+    "One independent successful witness per predefined mechanism episode; repeated polling does not multiply the denominator.",
+    "B3 uses the sampled B2 information budget, with ordering/expiry ignored for its union candidate set.",
+    "T uses full-resolution configuration and exact observed issuance lineage. T-S shares B2 inputs and semantics; equality is expected and reported.",
+    "S4 rolls back chain capability at 3000 and chain issuance at 3300 to verify both transitions separately.",
+    "Ten-per-core, five-control cohort is a proposal. Scaling is blocked until live pilots and resource review pass.",
+    "Primary matching now checks each direct witness at its request time for time-aware methods. B0/B3 are explicitly atemporal retrospective hypotheses. Historical structure recovery remains separate; prior appearance of a structure does not count as B1 detection of a later persistence instance.",
+    "S5 negative adjudication is limited to the observed-credential, declared-writer experiment model; it does not certify all hypothetical AWS issuance paths.",
+    "S1 reference eligibility starts at 1800 seconds, after every phase has its first nominal sample; early baseline probes are retained but do not create a left-boundary sampling artifact in the stable control."
+  ]
+}

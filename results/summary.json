@@ -1,0 +1,49 @@
+{
+  "cloudtrail_raw_rows": 1297,
+  "comparative_live_metrics": "NOT_ESTABLISHED",
+  "distinct_github_runs": 5,
+  "distinct_live_evidence_runs": 9,
+  "input_sha256": "31fdc66103693806ff51abc483729adabf5da7d4ae941ded6d8e4d1eabc054e1",
+  "missing_source_commits": [
+    "0be16aa9c76dc67c776d10a340ea8d68b7f470a7",
+    "84bb8c7de59cfdc5b2278efb76c21fbeff4012fa",
+    "c56afba9d0b49c048c37ffa586d7743e095c2a2a"
+  ],
+  "per_scenario": {
+    "s1": {
+      "COMPLETED": 3,
+      "FAILED": 1
+    },
+    "s2": {
+      "COMPLETED": 3
+    },
+    "s3": {
+      "COMPLETED": 2,
+      "FAILED": 1
+    },
+    "s4": {
+      "COMPLETED": 2
+    },
+    "s5": {
+      "COMPLETED": 1,
+      "FAILED": 1
+    },
+    "s6": {
+      "FAILED": 4,
+      "FAILED_RESTORATION_UNKNOWN": 1
+    }
+  },
+  "propagation_observations": 397,
+  "propagation_states": {
+    "allowed": 163,
+    "denied": 234
+  },
+  "retained_files_excluding_os_metadata": 245,
+  "scenario_attempts": 19,
+  "status_counts": {
+    "COMPLETED": 11,
+    "FAILED": 7,
+    "FAILED_RESTORATION_UNKNOWN": 1
+  },
+  "unique_cloudtrail_event_ids": 599
+}

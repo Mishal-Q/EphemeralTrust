@@ -1,0 +1,150 @@
+{
+  "automatic_scaling_authorized": false,
+  "protocol_digest": "1e99688ba5bb3f37df2c54114d3a9f6b34d108105080543fcd87a800ac6d29b8",
+  "reason": "An instrument pass is not evidence of a useful comparative effect. Review null explanation, same-input equality, endpoint eligibility and zero-cost feasibility before an evaluation freeze.",
+  "runs": [
+    {
+      "checks": {
+        "analysis_matches_evidence": true,
+        "analysis_present": true,
+        "cleanup": true,
+        "clock": true,
+        "complete_trace": true,
+        "coverage": true,
+        "credential_ledger_complete": true,
+        "restoration": true
+      },
+      "input_seal": "c2e8ef2f25e168c29253ac85e62cb3a4969ea898fe48769177103bf2e9374437",
+      "main_control": null,
+      "reference_instances": 0,
+      "run_id": "ep2-36665676238-1-s5",
+      "s5_certificate": {
+        "checks": {
+          "all_experiment_chain_expiries_before_phase2": true,
+          "complete_trace": true,
+          "credential_ledger_complete": true,
+          "issued_phase1_session": true,
+          "phase1_capability_denied": true,
+          "phase2_independent_verifier_success": true,
+          "recorded_expiry_gate": true,
+          "supported_readbacks": true
+        },
+        "scope": "Only declared experiment actor, complete harness issuance ledger and frozen phase schedule. Not universal AWS nonreachability.",
+        "status": "SCOPED_LEDGER_CERTIFIED"
+      },
+      "scenario": "s5"
+    },
+    {
+      "checks": {
+        "analysis_matches_evidence": true,
+        "analysis_present": true,
+        "cleanup": true,
+        "clock": true,
+        "complete_trace": true,
+        "coverage": true,
+        "credential_ledger_complete": true,
+        "restoration": true
+      },
+      "input_seal": "842895b30f904dd12ee1a9eb64c3fcb901e8595664fee47fd5a1307e49d9b8a0",
+      "main_control": null,
+      "reference_instances": 1,
+      "run_id": "ep2-36859246761-1-s2",
+      "s5_certificate": {
+        "status": "NOT_APPLICABLE"
+      },
+      "scenario": "s2"
+    },
+    {
+      "checks": {
+        "analysis_matches_evidence": true,
+        "analysis_present": true,
+        "cleanup": true,
+        "clock": true,
+        "complete_trace": true,
+        "coverage": true,
+        "credential_ledger_complete": true,
+        "restoration": true
+      },
+      "input_seal": "92d7093f7cf19737f5069e5975e26f615b70e875ef4f966a28e4cf74f4046086",
+      "main_control": null,
+      "reference_instances": 1,
+      "run_id": "ep2-36881737853-1-s3",
+      "s5_certificate": {
+        "status": "NOT_APPLICABLE"
+      },
+      "scenario": "s3"
+    },
+    {
+      "checks": {
+        "analysis_matches_evidence": true,
+        "analysis_present": true,
+        "cleanup": true,
+        "clock": true,
+        "complete_trace": true,
+        "coverage": false,
+        "credential_ledger_complete": true,
+        "restoration": true
+      },
+      "input_seal": "c9f73493cddcda8291152e13dcf4e68bc60e7b3085766789f6b83a4c37c2ffd3",
+      "main_control": null,
+      "reference_instances": 1,
+      "run_id": "ep2-36628372588-1-s4",
+      "s5_certificate": {
+        "status": "NOT_APPLICABLE"
+      },
+      "scenario": "s4"
+    },
+    {
+      "checks": {
+        "analysis_matches_evidence": true,
+        "analysis_present": true,
+        "cleanup": true,
+        "clock": true,
+        "complete_trace": true,
+        "coverage": true,
+        "credential_ledger_complete": true,
+        "restoration": true
+      },
+      "input_seal": "d09ba216a107ced1b7065d290fdc914a2708c395f47935a44b84898d13cbb8ae",
+      "main_control": null,
+      "reference_instances": 1,
+      "run_id": "ep2-36750470060-1-s1",
+      "s5_certificate": {
+        "status": "NOT_APPLICABLE"
+      },
+      "scenario": "s1"
+    },
+    {
+      "checks": {
+        "analysis_matches_evidence": true,
+        "analysis_present": true,
+        "cleanup": true,
+        "clock": true,
+        "complete_trace": true,
+        "coverage": true,
+        "credential_ledger_complete": true,
+        "main_control": true,
+        "restoration": true
+      },
+      "input_seal": "10c20f982b0c738082b0c54dfe26e57f91bb59c259f0d589bbc0d1529ca6f8f3",
+      "main_control": {
+        "all_sampled_main_allowed": true,
+        "allowed": 720,
+        "continuous_availability_proven": false,
+        "denied": 0,
+        "instrument_complete": true,
+        "sample_coverage": true,
+        "samples_in_trace": 720,
+        "unknown": 0
+      },
+      "reference_instances": 1,
+      "run_id": "ep2-36713352657-1-s6",
+      "s5_certificate": {
+        "status": "NOT_APPLICABLE"
+      },
+      "scenario": "s6"
+    }
+  ],
+  "source_digest": "c2f58a037a24fc2ca403c867477d5f545de96375b7777f8d93813b52e7c39819",
+  "status": "BLOCKED"
+}

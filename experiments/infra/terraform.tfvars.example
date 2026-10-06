@@ -1,0 +1,9 @@
+repository           = "YOUR_OWNER/YOUR_REPOSITORY"
+account_id           = "123456789012"
+installation         = "research"
+# The Phase-1 account likely already has GitHub's OIDC provider. Reuse it.
+# Set true ONLY after confirming that this provider is absent.
+create_oidc_provider = false
+
+# Copy from the GitHub-only preflight; newer repositories can include @IDs.
+oidc_subject_repository = "YOUR_OWNER@123456/YOUR_REPOSITORY@789012"

@@ -1,0 +1,16 @@
+{
+  "account_id": "REPLACE_12_DIGIT_ACCOUNT",
+  "repository": "REPLACE_OWNER/REPLACE_REPOSITORY",
+  "region": "us-east-1",
+  "controller_role_arn": "REPLACE_TERRAFORM_OUTPUT",
+  "provider_arn": "REPLACE_TERRAFORM_OUTPUT",
+  "bucket": "REPLACE_TERRAFORM_OUTPUT",
+  "subjects": {
+    "main": "repo:REPLACE_OWNER/REPLACE_REPOSITORY:environment:ep2-main",
+    "alternate": "repo:REPLACE_OWNER/REPLACE_REPOSITORY:environment:ep2-alternate"
+  },
+  "zero_cost_reviewed": false,
+  "dedicated_experiment_scope_confirmed": false,
+  "max_trace_seconds": 7200,
+  "max_live_runs_per_dispatch": 1
+}

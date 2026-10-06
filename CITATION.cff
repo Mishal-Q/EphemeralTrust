@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this research artifact, please cite the associated work."
+title: "EphemeralTrust: Session State and Observation Design in Controlled AWS Access Traces"
+type: software
+authors:
+  - family-names: "Qadir"
+    given-names: "Mishal"
+date-released: 2026-10-06
+license: MIT
