@@ -10,6 +10,8 @@ EphemeralTrust was built to explore that gap in a controlled AWS environment and
 
 **Paper:** [EphemeralTrust: Session State and Observation Design in Controlled AWS Access Traces](paper/EphemeralTrust_Manuscript.pdf)
 
+**Supplement:** [Detailed results, timing, exclusions and provenance](paper/SUPPLEMENT.md)
+
 ## The idea
 
 The experimental environment combines GitHub Actions OIDC, AWS STS, IAM roles and policies, temporary credentials, role chaining, S3 canary operations and CloudTrail.
