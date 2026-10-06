@@ -43,7 +43,7 @@ These are controlled scenarios rather than population-level measurements of AWS 
 - `analysis/` - offline reconstruction code
 - `results/` - selected derived results
 - `docs/` - methodology, validation, execution and provenance material
-- `paper/` - research manuscript
+- `paper/` - manuscript and supplement
 
 The repository contains the implementation used for the research, but not the entire private experiment archive. Raw runtime material, credentials, Terraform state, local environments and working copies are intentionally excluded.
 
